@@ -1,0 +1,79 @@
+Una stringa in informatica è una sequenza di caratteri con un ordine prestabilito. Sequenze di altri tipi di dato vengono chiamati vettori o, in inglese, array.
+Indice
+
+    1 Caratteristiche
+    2 Tipo di dato "stringa"
+    3 Rappresentazioni
+    4 Algoritmi per le stringhe
+    5 Linguaggi e programmi di utilità orientati all'elaborazione di stringhe
+    6 Voci correlate
+
+Caratteristiche
+
+Può essere composta da byte nel caso delle stringhe con codifica ASCII o da word per le codifiche Unicode.
+
+Spesso la sequenza di dati di cui è composta una stringa viene conclusa con un carattere speciale denominato NULL (come nel linguaggio C) che serve ad indicare la fine della stringa, anche se esistono diversi metodi di rappresentazione, alcuni dei quali utilizzano un diverso terminatore oppure si appoggiano ad altri sistemi per la determinazione della lunghezza (ad esempio un dato contenente la lunghezza della stringa immagazzinato a parte).
+
+In molti linguaggi di programmazione, come ad esempio Java oppure C# la stringa, per motivi di sicurezza, è un oggetto non modificabile (in Java è addirittura non estendibile). Questo vuol dire che ogni qualvolta viene assegnato un nuovo valore ad una stringa (operazione di concatenazione, rimozione o aggiunta caratteri) in realtà vengono create nuove stringhe.
+
+Ad esempio, in C++, l'istruzione
+
+string a = "abc" + "def";
+
+in realtà crea 4 stringhe: la stringa per rappresentare a, quella per rappresentare "abc", quella per rappresentare "def" e infine quella per immagazzinare il valore temporaneo "abcdef". Proprio per questo motivo linguaggi come Java e C# mettono a disposizione altri oggetti, come StringBuffer o StringBuilder che permettono operazioni sulle stringhe più veloci e meno onerose in termini di utilizzo della memoria.
+Tipo di dato "stringa"
+
+Un tipo di dato stringa è un tipo di dato modellato sull'idea di una stringa formale. Le stringhe sono un tipo di dati talmente importante e utile che fanno parte di quasi tutti i linguaggi di programmazione. In alcuni linguaggi sono disponibili solo tipi primitivi e in altri come tipi compositi.
+
+Mentre le stringhe formali possono avere una lunghezza arbitraria (ma finita), le stringhe dei linguaggi di programmazione hanno lunghezza limitata. In generale, ci sono due categorie di tipi di dati stringa: le stringhe a lunghezza fissa, che hanno una lunghezza massima prefissata, e le stringhe a lunghezza variabile, la cui lunghezza può essere modificata con apposite istruzioni. La maggior parte delle stringhe nei moderni linguaggi di programmazione sono a lunghezza variabile. Nonostante il nome, anche le stringhe a lunghezza variabile hanno un limite di lunghezza; tuttavia, in generale, il limite dipende solamente dalla quantità di memoria disponibile nel computer.
+
+I tipi di dato stringa differiscono anche in base all'alfabeto su cui sono definite. Alcune stringhe sono progettate per funzionare su un singolo alfabeto prefissato (come l'alfabeto latino o non come i caratteri rappresentabili dal codice ASCII) e altre su un alfabeto arbitrario. Per esempio, nella libreria standard del C++ le stringhe sono parametrizzate dall'alfabeto dei caratteri.
+Rappresentazioni
+
+La rappresentazione delle stringhe dipende principalmente dalla scelta dei set di caratteri da usare (come alfabeto) e il metodo di codifica dei caratteri (vedere character encoding). Le vecchie implementazioni delle stringhe erano studiate per lavorare con set di caratteri e codifiche definite dall'ASCII, od estensioni più recenti come la serie ISO 8859. Le implementazioni moderne usano spesso l'ampio set di caratteri definito come Unicode insieme con una varietà di complesse codifiche come l'UTF-8 e l'UTF-16.
+
+La gran parte delle implementazioni delle stringhe somigliano ad array i cui elementi contengono i codici corrispondenti ai caratteri nel corrispondente set di caratteri. La principale differenza è che in alcune codifiche l'equivalente di un singolo carattere logico può necessitare di più elementi dell'array. Un esempio in questo senso è la codifica UTF-8 in cui un singolo carattere logico può richiedere fino a quattro byte. In questi casi la lunghezza logica della stringa differisce da quella dell'array.
+
+La lunghezza di una stringa può essere memorizzata implicitamente utilizzando uno speciale carattere di terminazione. Questo carattere è spesso il carattere nullo (null character o NULL) avente codice zero, convenzione questa usata e perpetuata dal popolare linguaggio di programmazione C. La lunghezza di una stringa può anche venir memorizzata esplicitamente, ad esempio attaccando alla stringa un prefisso con un valore intero, convenzione questa usata ad esempio in Pascal. Si noti che nel caso delle stringhe terminate il carattere di terminazione non sarà mai ammissibile come contenuto di una stringa.
+
+Qui si ha un esempio di una stringa zero-terminata (o null-terminated) memorizzata in un buffer di 10 byte, assieme alla sua rappresentazione ASCII
+F 	R 	A 	N 	K 	NUL 	k 	e 	f 	w
+46 	52 	41 	4E 	4B 	00 	6B 	65 	66 	77
+
+La lunghezza della stringa è in questo esempio di 5 caratteri, essa occupa tuttavia 6 byte. I caratteri dopo la terminazione (6B 65 66 77, rispettivamente k e f w in ASCII) non sono parte della stringa, potrebbero essere parte di un'altra stringa come semplicemente rifiuti.
+
+La stringa equivalente in Pascal:
+length 	F 	R 	A 	N 	K 	k 	f 	f 	w
+05 	46 	52 	41 	4E 	4B 	6B 	66 	66 	77
+
+A fianco di queste comuni rappresentazioni altre sono possibili.
+
+L'utilizzo delle rope (anche dette heavyweight string) può rendere certe operazioni come inserimenti, cancellazioni e concatenazioni più efficienti. [1]
+Algoritmi per le stringhe
+
+Sono stati studiati molti algoritmi per la manipolazione delle stringhe i quali si distinguono per finalità e per diverse scelte di compromesso di fronte ad esigenze contrastanti come l'ampiezza della portata e l'efficienza.
+
+Questi algoritmi vengono collocati a categorie come le seguenti:
+
+    Algoritmi di ricerca di stringhe aventi il compito di trovare una data sottostringa o una data configurazione di caratteri,
+    Algoritmi di ordinamento (sorting),
+    Algoritmi per espressioni regolari,
+    Scansori e parser di stringhe.
+
+Gli algoritmi più avanzati per l'elaborazione di stringhe spesso impiegano elaborati meccanismi formali e complesse strutture di dati: tra questi ricordiamo gli alberi di suffissi e le macchine a stati finiti.
+Linguaggi e programmi di utilità orientati all'elaborazione di stringhe
+
+Le stringhe costituiscono un tipo di dati tanto ampiamente utilizzato da indurre lo sviluppo di numerosi linguaggi finalizzati alla facilitazione delle elaborazioni delle stringhe più richieste dalle applicazioni. Tra questi vi sono:
+
+    Awk
+    Icon
+    Perl
+    Tcl
+    MUMPS
+    Sed
+    SNOBOL
+
+Molti programmi di utilità dell'ambito Unix effettuano manipolazioni di stringhe relativamente semplici e possono essere utilizzati per programmare algoritmi di elaborazione di stringhe piuttosto efficaci. Questi strumenti possono trattare come stringhe anche i file e gli stream finiti.
+
+I recenti linguaggi di scripting, come Perl, Python, Ruby e Tcl si servono di espressioni regolari per facilitare le manovre sui testi.
+Voci correlate
