@@ -40,7 +40,7 @@ int main(int argc, char *argv[]){
         dup(piped[1]);
         close(piped[1]);
         printf("%s", &stringa);
-        execl("bin/grep", "-c", &stringa, NULL);
+        execl("/bin/grep", "grep", "-c", &stringa, argv[1], NULL);
         exit(0);
     }
 }
