@@ -15,6 +15,8 @@ int main(int argc, char* argv[]){
     int p1p2[2];
     int p2p3[2];
     int p3p0[2];
+    char buffer[1], *ptr, strimporto[100];
+    double totale = 0;
     if(pipe(p1p2)<0){
         printf("Errore creazione pipe");
         exit(1);
@@ -25,12 +27,12 @@ int main(int argc, char* argv[]){
         exit(1);
     }
     if (p1==0){
+        close(p1p2[0]);
         close(1);
         dup(p1p2[1]);
         close(p1p2[1]);
-        close(p1p2[0]);
         
-        execl("/user/bin/traceroute", "traceroute", argv[1], NULL);
+        execl("/usr/sbin/traceroute", "traceroute", argv[1], NULL);
         return -1;
     }
 
@@ -46,17 +48,17 @@ int main(int argc, char* argv[]){
     }
 
     if (p2==0){
+        close(p1p2[1]);
         close(0);
         dup(p1p2[0]);
         close(p1p2[0]);
-        close(p1p2[1]);
         
+        close(p2p3[0]);
         close(1);
         dup(p2p3[1]);
         close(p2p3[1]);
-        close(p2p3[0]);
 
-        execl("/user/bin/awk", "awk", "{print $4}", NULL);
+        execl("/usr/bin/awk", "awk", "{print $4}", NULL);
         return -1;
     }
 
@@ -74,24 +76,32 @@ int main(int argc, char* argv[]){
         exit(1);    
     }
     if (p3 == 0){
+        close(p2p3[1]);
         close(0);
         dup(p2p3[0]);
         close(p2p3[0]);
-        close(p2p3[1]);
 
+        close(p3p0[0]);
         close(1);
         dup(p3p0[1]);
-        close(p3p0[1]);
         close(p3p0[1]);
 
         execl("/bin/tail", "tail", "-n", "+2", NULL);
         return -1;
     }
 
-    close(p2p3[0]);
-    close(p2p3[1]);
-    close(p3p0[1]);
+    while (read(p3p0[0], buffer, 1) > 0)
+    {
+        strncat(strimporto, &buffer[0], sizeof(buffer[0]));
+        if (buffer[0] == '\n')
+        {
+            printf("Tempo parziale: %s", strimporto);
+            totale = totale + strtod(strimporto, &ptr);
+            strimporto[0] = '\0';
+        }
+    }
 
+    close(p3p0[0]);
+    printf("\nIl tempo totale impiegato è: %.2lf ms\n", totale);
     return 0;
-
 }
